@@ -1,10 +1,11 @@
 // add optionality for reusability 
-export interface IAttributes {
+export type IAttributes = {
     attributeName: string,
     scaleMin?:number,
     scaleMax?:number,
     value?:number,
-    weighting:number
+    weighting:number,
+    [propName:string]:any // Make this less strict
 }
 
 
@@ -24,6 +25,14 @@ export interface IInputAttributes {
 
 export interface IChoicesWithAttributes {
     choiceName:string,
-    attributes: IAttributes[],
+    attributes?: IAttributes[],
     score:number
+}
+
+export interface IUpdateWeighting {
+    updateWeighting:Function 
+}
+
+export interface IUpdateAttributeInChoice {
+    updateAttribute:Function 
 }

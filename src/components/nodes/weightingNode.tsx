@@ -1,11 +1,14 @@
 
-import React from 'react'
 import {IAttributes} from '../../helpers/interfaces'
+import {useContext} from 'react'
+import {weightingContext} from '../../helpers/allContexts'
 
-const WeightingNode = ({attributeName, weighting}:IAttributes) => {
+const WeightingNode = ({attributeName, weighting}:IAttributes  ) => {
+    console.log("weighting node rerenderd")
+    const weightingContextInstance = useContext(weightingContext)
 
-    const updateWeighting = (newWeightingValue:string) => {
-       
+    const updateWeighting = (newWeightingValue:string) => { 
+        weightingContextInstance.updateWeighting(attributeName, parseFloat(newWeightingValue))
     }
 
     return (
@@ -20,5 +23,4 @@ const WeightingNode = ({attributeName, weighting}:IAttributes) => {
 
 export default WeightingNode
 
-//add an onChange listener
 

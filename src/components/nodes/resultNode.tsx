@@ -1,12 +1,15 @@
+import {IChoicesWithAttributes} from '../../helpers/interfaces'
 
 
-
-const ResultNode = ({winningOption}:{winningOption:string}) => {
+const ResultNode = ({arrOfResults}:{arrOfResults:IChoicesWithAttributes[]}) => {
     return (
         <div>
-            <div>Winner</div>
+            <div>{arrOfResults.length>1?"There is a Tie":"Winner"}</div>
             <hr/>
-            <div>{winningOption}</div>
+            {arrOfResults.map(({choiceName}) => {
+                return <div> {choiceName}! </div>
+            } )}
+            <p>Score:{arrOfResults[0]?.score}</p>
         </div>
     )
 }
