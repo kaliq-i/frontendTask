@@ -9,7 +9,7 @@ const ResultNode = ({arrOfResults}:{arrOfResults:IChoicesWithAttributes[]}) => {
             {arrOfResults.map(({choiceName}) => {
                 return <div> {choiceName}! </div>
             } )}
-            <p>Score:{arrOfResults[0]?.score}</p>
+            <p>Score = {arrOfResults[0]?.score.toFixed(2)}</p>
         </div>
     )
 }

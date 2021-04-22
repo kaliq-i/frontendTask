@@ -4,7 +4,6 @@ import {useContext} from 'react'
 import {weightingContext} from '../../helpers/allContexts'
 
 const WeightingNode = ({attributeName, weighting}:IAttributes  ) => {
-    console.log("weighting node rerenderd")
     const weightingContextInstance = useContext(weightingContext)
 
     const updateWeighting = (newWeightingValue:string) => { 
