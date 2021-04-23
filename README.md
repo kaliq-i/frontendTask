@@ -19,7 +19,7 @@
 
 ## 'Assumptions:'
 
--   No BigInt used
+-   No BigInt used by user on the app
 -   The attributes all have a numerical scale
 -   The Minimum value on an attribute scale is 0
 
