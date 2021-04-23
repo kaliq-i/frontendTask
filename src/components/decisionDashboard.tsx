@@ -45,7 +45,6 @@ const DecisionDashboard = ({choices,attributes}:{choices:string[], attributes:IA
         const weightingChoicesLinksArr = createWeightingChoicesLinksArr(choicesNodeArr, weightingNodesArr)
         const allReactFlowElements:any = weightingNodesArr.concat(choicesNodeArr, resultNodeArr) //edges not recognised as elements, why?
         const elementsAndEdges = allReactFlowElements.concat(choicesResultLinksArr, weightingChoicesLinksArr)
-        console.log(elementsAndEdges)
         return elementsAndEdges
     }
     const createWeightingNodesArr = () => {
@@ -84,7 +83,7 @@ const DecisionDashboard = ({choices,attributes}:{choices:string[], attributes:IA
                      </decisionContext.Provider>
 
                             },
-                position:{x:index*200, y:300}
+                position:{x:index*200, y:320}
             }
         })
 
@@ -112,7 +111,7 @@ const DecisionDashboard = ({choices,attributes}:{choices:string[], attributes:IA
                     arrOfResults={namesAndScores}
                     />
                             },
-                position:{x:100, y:500}
+                position:{x:100, y:500+(attributes.length*40)}
         }]
         
             
