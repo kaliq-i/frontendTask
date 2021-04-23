@@ -3,7 +3,7 @@
 
 1.  Select two or more choices by inputting a choice name in the first form
 
-    1. Choices are a unique string
+    1. Choices must be unique strings
 
 2.  Select at least 1 attribute to compare each of your choices with
 
