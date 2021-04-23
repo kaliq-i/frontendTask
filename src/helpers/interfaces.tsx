@@ -29,10 +29,7 @@ export interface IChoicesWithAttributes {
     score:number
 }
 
-export interface IUpdateWeighting {
-    updateWeighting:Function 
-}
-
-export interface IUpdateAttributeInChoice {
+export interface IUpdateDecision {
+    updateWeighting:Function,
     updateAttribute:Function 
 }

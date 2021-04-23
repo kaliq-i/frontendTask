@@ -1,13 +1,14 @@
 
 import {IAttributes} from '../../helpers/interfaces'
 import {useContext} from 'react'
-import {weightingContext} from '../../helpers/allContexts'
+import {decisionContext} from '../../helpers/allContexts'
 
 const WeightingNode = ({attributeName, weighting}:IAttributes  ) => {
-    const weightingContextInstance = useContext(weightingContext)
+   
+    const decisionContextInstance = useContext(decisionContext)
 
     const updateWeighting = (newWeightingValue:string) => { 
-        weightingContextInstance.updateWeighting(attributeName, parseFloat(newWeightingValue))
+        decisionContextInstance.updateWeighting(attributeName, parseFloat(newWeightingValue))
     }
 
     return (

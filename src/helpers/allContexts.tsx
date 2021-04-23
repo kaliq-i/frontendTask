@@ -1,12 +1,9 @@
 import React from 'react';
-import {IUpdateWeighting, IUpdateAttributeInChoice} from './interfaces'
+import {IUpdateDecision} from './interfaces'
 
-const weightingContext = React.createContext<IUpdateWeighting>({
-  updateWeighting:Function  //this works? why?
-});
-
-const attributeContext = React.createContext<IUpdateAttributeInChoice>({
+const decisionContext = React.createContext<IUpdateDecision>({
+  updateWeighting:Function, //this works? why?
   updateAttribute:Function  //this works? why?
 });
 
-export { weightingContext, attributeContext };
+export { decisionContext };
