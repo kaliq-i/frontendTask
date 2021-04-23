@@ -12,18 +12,19 @@ const ChoicesNode = ({choiceName,attributes, score}:IChoicesWithAttributes) => {
     
     return (
         <div>
-            <div>{choiceName}</div>
+            <div className="font-bold text-lg">{choiceName}</div>
             <hr/>
             {attributes?.map(({attributeName,scaleMax, scaleMin, value}, index) => {
-                return <div key={attributeName}>
-                    <p>{attributeName}</p>
+                return <div key={attributeName} className="mt-2">
+                    <p>{attributeName}: <span className="font-bold">{value}</span></p>
                     <input type="range" min={scaleMin} max={scaleMax} step={1} value={value} onChange={(event)=> updateAttributeValue(parseFloat(event.target.value), index)}/>
-                    <p>Current Value = {value}</p> 
+                    
                     <hr/>
                      </div>
             })}
             <hr/>
-            <div> Current Score = {score.toFixed(2)}</div>
+            <div className="mt-2 font-bold text-md">Score</div>
+            <div className="font-bold text-lg text-indigo-600">{score.toFixed(2)}</div>
         </div>
     )
 }
