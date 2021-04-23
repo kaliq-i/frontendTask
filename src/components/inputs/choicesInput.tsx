@@ -63,11 +63,11 @@ const ChoicesInput = ({choices, addChoice, removeChoice, updateDisplay}:IInputCh
             </div>
 
             
-            <div className="flex flex-row flex-wrap w-full mt-10">
+            <div className="flex flex-row flex-wrap w-full mt-10 justify-center">
 
                 {choices.map((element:string, index:number) => {
                     return (
-                    <div key={index} className="w-auto mb-4 h-16 m-5 flex relative items-center px-5 justify-center flex-col border border-opacity-100 text-base font-medium rounded-md bg-white shadow-md  md:text-lg">
+                    <div key={element} className="w-auto mb-4 h-16 m-5 flex relative items-center px-5 justify-center flex-col border border-opacity-100 text-base font-medium rounded-md bg-white shadow-md  md:text-lg">
                         <p>{element}</p>
                         <button onClick={() => handleRemoveChoice(index)} className="absolute -top-2 -right-2">
                             <i className="fas fa-times-circle text-red-500"></i>
