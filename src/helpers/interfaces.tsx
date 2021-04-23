@@ -33,3 +33,12 @@ export interface IUpdateDecision {
     updateWeighting:Function,
     updateAttribute:Function 
 }
+
+export interface IEdge {
+    id:string,
+    type:string,
+    source:string,
+    target:string,
+    animated?:boolean
+}
+

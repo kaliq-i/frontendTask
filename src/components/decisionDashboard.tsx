@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react'
-import {IAttributes, IChoicesWithAttributes} from '../helpers/interfaces'
+import {IAttributes, IChoicesWithAttributes,IEdge}  from '../helpers/interfaces'
 import ReactFlow, {Background, MiniMap, Controls, ReactFlowProps} from 'react-flow-renderer';
 import {decisionContext} from '../helpers/allContexts'
 import cloneDeep from 'lodash.clonedeep'
@@ -37,18 +37,22 @@ const DecisionDashboard = ({choices,attributes}:{choices:string[], attributes:IA
     
 
     // the first time this runs - the state variable choicesWithAttributes will undefined 
-    const createReactFlowElements = () :ReactFlowProps["elements"] => {
+    const createReactFlowElements = () :ReactFlowProps["elements"]  => {
         const weightingNodesArr = createWeightingNodesArr()
         const resultNodeArr = createResultNodeArr()
         const choicesNodeArr = createChoicesNodeArr()
-        const allReactFlowElements = weightingNodesArr.concat(choicesNodeArr, resultNodeArr)
-        return allReactFlowElements
+        const choicesResultLinksArr = createChoicesResultLinksArr(choicesNodeArr,resultNodeArr)
+        const weightingChoicesLinksArr = createWeightingChoicesLinksArr(choicesNodeArr, weightingNodesArr)
+        const allReactFlowElements:any = weightingNodesArr.concat(choicesNodeArr, resultNodeArr) //edges not recognised as elements, why?
+        const elementsAndEdges = allReactFlowElements.concat(choicesResultLinksArr, weightingChoicesLinksArr)
+        console.log(elementsAndEdges)
+        return elementsAndEdges
     }
     const createWeightingNodesArr = () => {
 
         const arrOfWeightingNodes = choicesWithAttributes[0].attributes!.map(({attributeName, weighting}:IAttributes, index:number) => {
             return {
-                id:`${attributeName}-weighting`,
+                id:`weighting${index+1}`,
                 type:'input',
                 data: {label: 
                 <decisionContext.Provider value={valueForContextAPI} key={attributeName}>
@@ -68,7 +72,7 @@ const DecisionDashboard = ({choices,attributes}:{choices:string[], attributes:IA
     const createChoicesNodeArr = () => {
         const arrOfChoiceNodes = choicesWithAttributes.map((choice,index) => {
             return {
-                id:`${choice.choiceName}-choice`,
+                id:`choice${index+1}`,
                 type:'default',
                 data: {label:
                     <decisionContext.Provider value={valueForContextAPI} key={choice.choiceName}>
@@ -113,7 +117,45 @@ const DecisionDashboard = ({choices,attributes}:{choices:string[], attributes:IA
         
             
     }
+
+    const createChoicesResultLinksArr = (choicesArr:ReactFlowProps["elements"], resultsArr:ReactFlowProps["elements"]) :IEdge[] => {
+        
+        const choicesResultLinks = choicesArr.map((choice) => {
+            return {
+                id:`${choice.id}-result`, 
+                type:"smoothstep", 
+                source:`${choice.id}`, 
+                target:"result", 
+                animated:true}
+
+        })
+
+        return choicesResultLinks
+    }
+
+    const createWeightingChoicesLinksArr = (choicesArr:ReactFlowProps["elements"], WeightingArr:ReactFlowProps["elements"]) :IEdge[] => {
+        
+        const allLinksAllWeighting = WeightingArr.map((singleWeighting) => {
+            const linksFor1Weighting = []
+            
+            for (let i=1; i<choicesArr.length+1; i++) {
+                
+                const singleLink = {
+                    id:`${singleWeighting.id}-choice${i}`,
+                    type:"smoothstep",
+                    source:`${singleWeighting.id}`,
+                    target:`choice${i}`,
+                    animated:true    
+                }
+                linksFor1Weighting.push(singleLink)
+            }
+            return linksFor1Weighting
+            
+        })
+        return allLinksAllWeighting.flat()
+    }
     
+
     const cloneAndRestoreGetters = () => {
         const copyOfChoicesWithAttributes:IChoicesWithAttributes[] =  cloneDeep(choicesWithAttributes)//solve Mutation
         for (let choice of copyOfChoicesWithAttributes) {

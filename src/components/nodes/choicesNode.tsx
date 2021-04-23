@@ -17,7 +17,7 @@ const ChoicesNode = ({choiceName,attributes, score}:IChoicesWithAttributes) => {
             {attributes?.map(({attributeName,scaleMax, scaleMin, value}, index) => {
                 return <div key={attributeName}>
                     <p>{attributeName}</p>
-                    <input type="range" min={scaleMin} max={scaleMax} step={5} value={value} onChange={(event)=> updateAttributeValue(parseFloat(event.target.value), index)}/>
+                    <input type="range" min={scaleMin} max={scaleMax} step={1} value={value} onChange={(event)=> updateAttributeValue(parseFloat(event.target.value), index)}/>
                     <p>Current Value = {value}</p> 
                     <hr/>
                      </div>
